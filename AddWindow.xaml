@@ -1,0 +1,452 @@
+﻿<Window x:Class="ProjectRVA.AddWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjectRVA"
+        mc:Ignorable="d"
+       Title="AddWindows" Height="400" Width="600" AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ScrollBarColorKey}}"/>
+    </Window.Background>
+    <Grid>
+        <Border BorderThickness="2,6,2,2" Height="405" Canvas.Top="-35" Width="600">
+            <Border.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+            </Border.BorderBrush>
+        </Border>
+        <Button Content="" Height="20" Canvas.Left="575" Canvas.Top="-25" Width="20" Margin="575,5,5,375">
+            <Button.Style>
+                <Style  TargetType="{x:Type Button}">
+                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="icon/x.png"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="BorderBrush" Value="#cccccc"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="Foreground" Value="#333333"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="Padding" Value="16,3,16,3"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border x:Name="Chrome"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="true">
+                                    <ContentPresenter x:Name="Presenter" Margin="{TemplateBinding Padding}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    RecognizesAccessKey="True"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsEnabled" Value="false">
+                                        <Setter Property="Foreground" Value="#333333" />
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Opacity" Value="0.5"/>
+                                        <Setter Property="BorderBrush" Value="#cccccc" />
+                                        <Setter Property="Foreground" Value="#333333" />
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter Property="Opacity" Value="0.5"/>
+                                        <Setter Property="BorderBrush" Value="#1ba1e2"/>
+                                        <Setter Property="Foreground" Value="#ffffff"/>
+                                    </Trigger>
+                                    <Trigger Property="IsFocused" Value="true">
+                                        <Setter TargetName="Chrome" Property="BorderBrush" Value="#1ba1e2" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+
+        </Button>
+        <TabControl HorizontalAlignment="Left" Height="365" Margin="0,30,0,0" VerticalAlignment="Top" Width="595" TabStripPlacement="Left">
+            <TabControl.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+            </TabControl.Background>
+            <TabItem x:Name="substation_tab" Header="Substation" Height="34" VerticalAlignment="Bottom">
+                <TabItem.Style>
+                    <Style TargetType="{x:Type TabItem}">
+                        <Setter Property="FontSize" Value="12"/>
+                        <Setter Property="Foreground" Value="#FF474747"/>
+
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type TabItem}">
+                                    <ControlTemplate.Resources>
+                                        <Storyboard x:Key="StartAction">
+                                            <DoubleAnimation Storyboard.TargetName="Border1Highlited" Storyboard.TargetProperty="(UIElement.Opacity)" From="0" To="1" Duration="0:0:0.5"/>
+                                            <DoubleAnimation Storyboard.TargetName="Border2Highlited" Storyboard.TargetProperty="(UIElement.Opacity)" From="0" To="1" Duration="0:0:0.5"/>
+                                        </Storyboard>
+
+                                        <Storyboard x:Key="ExitAction">
+                                            <DoubleAnimation Storyboard.TargetName="Border1Highlited" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.3" />
+                                            <DoubleAnimation Storyboard.TargetName="Border2Highlited" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.3" />
+                                        </Storyboard>
+                                    </ControlTemplate.Resources>
+
+                                    <Grid x:Name="Root">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="90" />
+                                            <ColumnDefinition Width="0" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="4" />
+                                            <RowDefinition Height="0" />
+                                        </Grid.RowDefinitions>
+                                        <Border x:Name="Border"  Margin="0,0,0,0" Background="#ededed">
+                                            <ContentPresenter x:Name="ContentSite"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"
+                                          ContentSource="Header"
+                                          Margin="30,10,30,4"
+                                          RecognizesAccessKey="True" />
+                                        </Border>
+                                        <Border Grid.Column="1" Margin="0,10,0,4" Background="#d6d6d6" />
+
+                                        <Border Grid.Row="1" Grid.ColumnSpan="2" Background="#ededed"/>
+                                        <Border Grid.Row="1" Grid.ColumnSpan="2" Name="Border1Highlited" Background="Transparent"/>
+
+                                        <Border Grid.Row="2" Grid.ColumnSpan="2" Background="#c9c9c9"/>
+                                        <Border Grid.Row="2" Grid.ColumnSpan="2" Name="Border2Highlited" Background="Transparent"/>
+
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Panel.ZIndex" Value="100" />
+                                            <Setter TargetName="Border1Highlited" Property="Background" Value="#33b4ed" />
+                                            <Setter TargetName="Border2Highlited" Property="Background" Value="#009de2" />
+                                            <Trigger.EnterActions>
+                                                <BeginStoryboard Storyboard="{StaticResource StartAction}"/>
+                                            </Trigger.EnterActions>
+                                            <Trigger.ExitActions>
+                                                <BeginStoryboard Storyboard="{StaticResource ExitAction}"/>
+                                            </Trigger.ExitActions>
+                                        </Trigger>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Foreground" Value="#cccccc" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TabItem.Style>
+                <Grid>
+                    <Grid.Background>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+                    </Grid.Background>
+                    <Label x:Name="name_label1" Content="Name" HorizontalAlignment="Left" Height="24" Margin="20,61,0,0" VerticalAlignment="Top" Width="76"/>
+                    <Label x:Name="type_label1" Content="Nominal voltage" HorizontalAlignment="Left" Height="28" Margin="20,106,0,0" VerticalAlignment="Top" Width="129"/>
+                    <Label x:Name="description_label1" Content="Description" HorizontalAlignment="Left" Margin="20,167,0,0" VerticalAlignment="Top" Width="76"/>
+                    <TextBox x:Name="substation_description" HorizontalAlignment="Left" Height="72" Margin="122,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="315"/>
+                    <Button Content="Ok" HorizontalAlignment="Left" Margin="167,258,0,0" VerticalAlignment="Top" Width="100" Height="34" Click="add_substation_ok">
+                        <Button.Style>
+                            <Style  TargetType="{x:Type Button}">
+                                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                                <Setter Property="Background" Value="#ffffff"/>
+                                <Setter Property="BorderBrush" Value="#cccccc"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="Foreground" Value="#333333"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                <Setter Property="Padding" Value="16,3,16,3"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border x:Name="Chrome"
+        										Background="{TemplateBinding Background}"
+        										BorderBrush="{TemplateBinding BorderBrush}"
+        										BorderThickness="{TemplateBinding BorderThickness}"
+        										SnapsToDevicePixels="true">
+                                                <ContentPresenter x:Name="Presenter" Margin="{TemplateBinding Padding}"
+        											VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+        											HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+        											RecognizesAccessKey="True"
+        											SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsEnabled" Value="false">
+                                                    <Setter Property="Foreground" Value="#333333" />
+                                                </Trigger>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#FFD7F1F9" />
+                                                    <Setter Property="BorderBrush" Value="#cccccc" />
+                                                    <Setter Property="Foreground" Value="#333333" />
+                                                </Trigger>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter Property="Background" Value="#1ba1e2" />
+                                                    <Setter Property="BorderBrush" Value="#1ba1e2"/>
+                                                    <Setter Property="Foreground" Value="#ffffff"/>
+                                                </Trigger>
+                                                <Trigger Property="IsFocused" Value="true">
+                                                    <Setter TargetName="Chrome" Property="BorderBrush" Value="#1ba1e2" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button Content="Cancel" HorizontalAlignment="Left" Margin="291,257,0,0" VerticalAlignment="Top" Width="100" Height="35" Click="add_substation_cancel">
+                        <Button.Style>
+                            <Style  TargetType="{x:Type Button}">
+                                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                                <Setter Property="Background" Value="#ffffff"/>
+                                <Setter Property="BorderBrush" Value="#cccccc"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="Foreground" Value="#333333"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                <Setter Property="Padding" Value="16,3,16,3"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border x:Name="Chrome"
+        										Background="{TemplateBinding Background}"
+        										BorderBrush="{TemplateBinding BorderBrush}"
+        										BorderThickness="{TemplateBinding BorderThickness}"
+        										SnapsToDevicePixels="true">
+                                                <ContentPresenter x:Name="Presenter" Margin="{TemplateBinding Padding}"
+        											VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+        											HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+        											RecognizesAccessKey="True"
+        											SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsEnabled" Value="false">
+                                                    <Setter Property="Foreground" Value="#333333" />
+                                                </Trigger>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#FFD7F1F9" />
+                                                    <Setter Property="BorderBrush" Value="#cccccc" />
+                                                    <Setter Property="Foreground" Value="#333333" />
+                                                </Trigger>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter Property="Background" Value="#1ba1e2" />
+                                                    <Setter Property="BorderBrush" Value="#1ba1e2"/>
+                                                    <Setter Property="Foreground" Value="#ffffff"/>
+                                                </Trigger>
+                                                <Trigger Property="IsFocused" Value="true">
+                                                    <Setter TargetName="Chrome" Property="BorderBrush" Value="#1ba1e2" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <TextBox x:Name="substation_name"  HorizontalAlignment="Left" Height="24" Margin="122,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="205"/>
+                    <ComboBox x:Name="nominalVoltage_combobox" HorizontalAlignment="Left" Height="28" Margin="122,106,0,0" VerticalAlignment="Top" Width="205" Background="#ededed">
+                        <ComboBoxItem>110</ComboBoxItem>
+                        <ComboBoxItem>220</ComboBoxItem>
+                        <ComboBoxItem>410</ComboBoxItem>
+                    </ComboBox>
+                    <Label x:Name="label1" Content="Add Substation" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
+                </Grid>
+
+            </TabItem>
+
+            <TabItem x:Name="node_tab" Header="Node" Height="34" VerticalAlignment="Bottom">
+                <TabItem.Style>
+                    <Style TargetType="{x:Type TabItem}">
+                        <Setter Property="FontSize" Value="12"/>
+                        <Setter Property="Foreground" Value="#FF474747"/>
+
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type TabItem}">
+                                    <ControlTemplate.Resources>
+                                        <Storyboard x:Key="StartAction">
+                                            <DoubleAnimation Storyboard.TargetName="Border1Highlited" Storyboard.TargetProperty="(UIElement.Opacity)" From="0" To="1" Duration="0:0:0.5"/>
+                                            <DoubleAnimation Storyboard.TargetName="Border2Highlited" Storyboard.TargetProperty="(UIElement.Opacity)" From="0" To="1" Duration="0:0:0.5"/>
+                                        </Storyboard>
+
+                                        <Storyboard x:Key="ExitAction">
+                                            <DoubleAnimation Storyboard.TargetName="Border1Highlited" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.3" />
+                                            <DoubleAnimation Storyboard.TargetName="Border2Highlited" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.3" />
+                                        </Storyboard>
+                                    </ControlTemplate.Resources>
+
+                                    <Grid x:Name="Root">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="90" />
+                                            <ColumnDefinition Width="0" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="4" />
+                                            <RowDefinition Height="0" />
+                                        </Grid.RowDefinitions>
+                                        <Border x:Name="Border"  Margin="0,0,0,0" Background="#ededed">
+                                            <ContentPresenter x:Name="ContentSite"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"
+                                          ContentSource="Header"
+                                          Margin="30,10,30,4"
+                                          RecognizesAccessKey="True" />
+                                        </Border>
+                                        <Border Grid.Column="1" Margin="0,10,0,4" Background="#d6d6d6" />
+
+                                        <Border Grid.Row="1" Grid.ColumnSpan="2" Background="#ededed"/>
+                                        <Border Grid.Row="1" Grid.ColumnSpan="2" Name="Border1Highlited" Background="Transparent"/>
+
+                                        <Border Grid.Row="2" Grid.ColumnSpan="2" Background="#c9c9c9"/>
+                                        <Border Grid.Row="2" Grid.ColumnSpan="2" Name="Border2Highlited" Background="Transparent"/>
+
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Panel.ZIndex" Value="100" />
+                                            <Setter TargetName="Border1Highlited" Property="Background" Value="#33b4ed" />
+                                            <Setter TargetName="Border2Highlited" Property="Background" Value="#009de2" />
+                                            <Trigger.EnterActions>
+                                                <BeginStoryboard Storyboard="{StaticResource StartAction}"/>
+                                            </Trigger.EnterActions>
+                                            <Trigger.ExitActions>
+                                                <BeginStoryboard Storyboard="{StaticResource ExitAction}"/>
+                                            </Trigger.ExitActions>
+                                        </Trigger>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Foreground" Value="#cccccc" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TabItem.Style>
+                <Grid>
+                    <Grid.Background>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+                    </Grid.Background>
+                    <Label x:Name="name_label11" Content="Name" HorizontalAlignment="Left" Height="24" Margin="20,56,0,0" VerticalAlignment="Top" Width="76"/>
+                    <Label x:Name="type_label11" Content="Nominal voltage" HorizontalAlignment="Left" Height="28" Margin="20,97,0,0" VerticalAlignment="Top" Width="129"/>
+                    <Label x:Name="description_label11" Content="Description" HorizontalAlignment="Left" Margin="19,185,0,0" VerticalAlignment="Top" Width="76"/>
+                    <TextBox x:Name="node_description" HorizontalAlignment="Left" Height="72" Margin="122,185,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="315"/>
+                    <Button Content="Ok" HorizontalAlignment="Left" Margin="158,274,0,0" VerticalAlignment="Top" Width="100" Height="34" Click="add_node_ok">
+                        <Button.Style>
+                            <Style  TargetType="{x:Type Button}">
+                                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                                <Setter Property="Background" Value="#ffffff"/>
+                                <Setter Property="BorderBrush" Value="#cccccc"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="Foreground" Value="#333333"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                <Setter Property="Padding" Value="16,3,16,3"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border x:Name="Chrome"
+        										Background="{TemplateBinding Background}"
+        										BorderBrush="{TemplateBinding BorderBrush}"
+        										BorderThickness="{TemplateBinding BorderThickness}"
+        										SnapsToDevicePixels="true">
+                                                <ContentPresenter x:Name="Presenter" Margin="{TemplateBinding Padding}"
+        											VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+        											HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+        											RecognizesAccessKey="True"
+        											SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsEnabled" Value="false">
+                                                    <Setter Property="Foreground" Value="#333333" />
+                                                </Trigger>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#FFD7F1F9" />
+                                                    <Setter Property="BorderBrush" Value="#cccccc" />
+                                                    <Setter Property="Foreground" Value="#333333" />
+                                                </Trigger>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter Property="Background" Value="#1ba1e2" />
+                                                    <Setter Property="BorderBrush" Value="#1ba1e2"/>
+                                                    <Setter Property="Foreground" Value="#ffffff"/>
+                                                </Trigger>
+                                                <Trigger Property="IsFocused" Value="true">
+                                                    <Setter TargetName="Chrome" Property="BorderBrush" Value="#1ba1e2" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button Content="Cancel" HorizontalAlignment="Left" Margin="284,274,0,0" VerticalAlignment="Top" Width="100" Height="35" Click="add_node_cancel">
+                        <Button.Style>
+                            <Style  TargetType="{x:Type Button}">
+                                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                                <Setter Property="Background" Value="#ffffff"/>
+                                <Setter Property="BorderBrush" Value="#cccccc"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="Foreground" Value="#333333"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                <Setter Property="Padding" Value="16,3,16,3"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border x:Name="Chrome"
+        										Background="{TemplateBinding Background}"
+        										BorderBrush="{TemplateBinding BorderBrush}"
+        										BorderThickness="{TemplateBinding BorderThickness}"
+        										SnapsToDevicePixels="true">
+                                                <ContentPresenter x:Name="Presenter" Margin="{TemplateBinding Padding}"
+        											VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+        											HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+        											RecognizesAccessKey="True"
+        											SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsEnabled" Value="false">
+                                                    <Setter Property="Foreground" Value="#333333" />
+                                                </Trigger>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#FFD7F1F9" />
+                                                    <Setter Property="BorderBrush" Value="#cccccc" />
+                                                    <Setter Property="Foreground" Value="#333333" />
+                                                </Trigger>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter Property="Background" Value="#1ba1e2" />
+                                                    <Setter Property="BorderBrush" Value="#1ba1e2"/>
+                                                    <Setter Property="Foreground" Value="#ffffff"/>
+                                                </Trigger>
+                                                <Trigger Property="IsFocused" Value="true">
+                                                    <Setter TargetName="Chrome" Property="BorderBrush" Value="#1ba1e2" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <TextBox x:Name="node_name"  HorizontalAlignment="Left" Height="24" Margin="122,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="205"/>
+                    <ComboBox x:Name="node_nominalVoltage" HorizontalAlignment="Left" Height="28" Margin="122,97,0,0" VerticalAlignment="Top" Width="205" Background="#ededed">
+                        <ComboBoxItem>110</ComboBoxItem>
+                        <ComboBoxItem>220</ComboBoxItem>
+                        <ComboBoxItem>410</ComboBoxItem>
+                    </ComboBox>
+                    <ComboBox x:Name="comboBox_substation"  ItemsSource="{Binding Substations}" DisplayMemberPath="Name" SelectedValuePath="Name" SelectedValue="{Binding PhonebookEntry}"  HorizontalAlignment="Left" Margin="122,144,0,0" VerticalAlignment="Top" Width="205" />
+                    <Label x:Name="label" Content="Substation" HorizontalAlignment="Left" Margin="20,144,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="label2" Content="Add ConnectivityNode" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0,0.269"/>
+                </Grid>
+
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+</Window>
